@@ -15,16 +15,14 @@ let color = 'синий';
 
 switch (color) {
     case 'синий':
-        console.log('blue');
         color = 'blue';
         break;
     case 'зеленый':
-        console.log('green');
         color = 'green'
         break;
     case 'красный':
-        console.log('red');
         color = red;
         break;
 }
+console.log(color);
 document.body.style.backgroundColor = color;
