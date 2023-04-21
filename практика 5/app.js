@@ -62,7 +62,47 @@ let drawHTMLSecond = () => {
   newh3.innerHTML = `перевернутый массив 3: ${mass3}`;
 }
 drawHTMLSecond();
+
+let addgap = () => {
+  let breakpage = document.createElement('br');
+  document.body.append(breakpage);
+}
+
 mass3.sort();
 let h2num2 = document.createElement('h2');
 document.body.append(h2num2);
 h2num2.innerHTML = `sorted: ${mass3}`;
+
+
+for (let i = 0; i < fruit.length; i++) {
+  fruit[i] = fruit[i] + " съел";
+}
+
+let added = document.createElement('h2');
+document.body.append(added);
+added.innerHTML = fruit;
+
+// В массиве bird замените Ворону и Воробья на Галку и Голубя. Выведите полученный массив.
+birds.splice(2, 2, "Галка", "Голубь");
+document.write(birds);
+
+let imgarr;
+
+
+
+
+//objects task
+let worker = {
+  name: "Anatoliy",
+  surname: "Chmuckuch",
+  age: 27,
+  salary: 1488,
+}
+addgap();
+document.write(worker.name);
+addgap();
+document.write(worker.surname);
+addgap();
+document.write(worker.age);
+addgap();
+document.write(worker.salary);
