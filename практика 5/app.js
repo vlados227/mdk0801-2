@@ -107,10 +107,17 @@ let drawTimeOfYear = () =>{
   document.write(TimeOfYear[2][2]);
   addgap();
   document.write(TimeOfYear[0][2]);
-  //document.write
+  document.write(TimeOfYear[3][0]);
+  document.write(` ${TimeOfYear[3][1]} `);
+  document.write(TimeOfYear[3][2]);
+  addgap();
+  document.write(TimeOfYear[0][3]);
+  document.write(TimeOfYear[4][0]);
+  document.write(` ${TimeOfYear[4][1]} `);
+  document.write(TimeOfYear[4][2]);
 }
 drawTimeOfYear()
-
+addgap();
 //objects task
 let worker = {
   name: "Anatoliy",
@@ -140,3 +147,14 @@ let ShowSalary = () => {
   draw.innerHTML = `Зарплата ${worker.name} - ${worker.salary}`;
 }
 ShowSalary();
+
+let MyImages = [
+  '1.png',
+  '2.png',
+  '3.png',
+  '4.png',
+  '5.png',
+  '6.png',
+];
+let userInput = prompt('Какое изображение загрузить?');
+let selectedImage = MyImages.find(image => image.includes(userInput));
