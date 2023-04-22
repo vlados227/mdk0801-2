@@ -86,10 +86,30 @@ added.innerHTML = fruit;
 birds.splice(2, 2, "Галка", "Голубь");
 document.write(birds);
 
-let imgarr;
-
-
-
+let TimeOfYear = [
+  ["зима: ", "весна: ", "лето: ", "осень: "],
+  ["декабрь", "январь", "февраль"],
+  ["март", "апрель", "май"],
+  ["июнь", "июль", "август"],
+  ["сентябрь", "октябрь", "ноябрь"]
+]
+addgap();
+document.write(`<h1><b>Времена года:</b></h1>`)
+let drawTimeOfYear = () =>{
+  document.write(TimeOfYear[0][0]);
+  document.write(TimeOfYear[1][0]);
+  document.write(` ${TimeOfYear[1][1]} `);
+  document.write(TimeOfYear[1][2]);
+  addgap();
+  document.write(TimeOfYear[0][1]);
+  document.write(TimeOfYear[2][0]);
+  document.write(` ${TimeOfYear[2][1]} `);
+  document.write(TimeOfYear[2][2]);
+  addgap();
+  document.write(TimeOfYear[0][2]);
+  //document.write
+}
+drawTimeOfYear()
 
 //objects task
 let worker = {
@@ -99,10 +119,24 @@ let worker = {
   salary: 1488,
 }
 addgap();
-document.write(worker.name);
+document.write("<b>свойства объекта:</b>");
+for (let key in worker) {
+  addgap();
+  document.write(worker[key]);
+}
 addgap();
-document.write(worker.surname);
-addgap();
-document.write(worker.age);
-addgap();
-document.write(worker.salary);
+worker.name = 'Valera';
+document.write("<b>Измененные свойства объекта: </b>")
+let modifyWorkerProps = () =>{
+  for (key in worker) {
+    addgap();
+    document.write(worker[key]);
+  }
+}
+modifyWorkerProps();
+let ShowSalary = () => {
+  let draw = document.createElement('h1');
+  document.body.append(draw);
+  draw.innerHTML = `Зарплата ${worker.name} - ${worker.salary}`;
+}
+ShowSalary();
