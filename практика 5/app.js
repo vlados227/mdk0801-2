@@ -156,5 +156,5 @@ let MyImages = [
   '5.png',
   '6.png',
 ];
-let userInput = prompt('Какое изображение загрузить?');
-let selectedImage = MyImages.find(image => image.includes(userInput));
+// let userInput = prompt('Какое изображение загрузить?');
+// let selectedImage = MyImages.find(image => image.includes(userInput));
