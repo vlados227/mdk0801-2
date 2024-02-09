@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <style>
+    *{
+      margin-left: 30px;
+      margin-bottom: 15px;
+    }
+    td{
+      padding: 30px;
+    }
+    tr{
+      border-bottom: 0px;
+      font-size: 1.2rem;
+    }
+    tr:nth-child(2){
+      color: red;
+      font-size: 2rem;
+    }
+    table{
+      border-collapse: collapse;
+      text-align: center;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="date"></div>
+  <div id="time"></div>
+
+  <table border="1">
+    <caption></caption>
+    <tbody>
+      <tr>
+        <td id="day">
+        </td>
+      </tr>
+      <tr>
+        <td id="month">
+        </td>
+      </tr>
+      <tr>
+        <td id="year">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    let date = new Date;
+    let settings = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      timezone: 'UTC',
+      weekday: 'long'
+    }
+    let timeSettings = {
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric'
+    }
+    let ruMonth = {
+      month: 'long'
+    }
+    let calendar = document.getElementById('date');
+    let time = document.getElementById('time');
+    calendar.innerText = (`В Самаре ${date.toLocaleString("ru", settings)}`);
+    time.innerText = (`Время ${date.toLocaleString("ru", timeSettings)}`);
+    let dd = document.getElementById('day');
+    let mm = document.getElementById('month');
+    let yy = document.getElementById('year');
+    dd.innerText = date.getDate();
+    mm.innerText = date.toLocaleString('ru', ruMonth);
+    yy.innerText = date.getFullYear();
+  </script>
+</body>
+
+</html>
