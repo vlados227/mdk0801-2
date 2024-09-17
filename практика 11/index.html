@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    form{
+      width: 20%;
+    }
+    label {
+      float: left;
+      margin-right: 10px;
+    }
+    label, input{
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <form id="form">
+    <input type="text" name="width" id="width">
+    <label for="width">ширина</label>
+    <input type="text" name="length" id="length">
+    <label for="length">длина</label>
+    <input type="submit" value="Вычислить">
+    <input type="text" name="answer" id="answer" placeholder="ответ">
+  </form>
+
+  <h3>Форма авторизации</h3>
+    <form id="authForm">
+        <label for="login">Логин:</label>
+        <input type="text" id="login"><br><br>
+        <label for="password">Пароль:</label>
+        <input type="password" id="password"><br><br>
+        <button type="submit">Войти</button>
+        <p id="error-message" class="error"></p>
+    </form>
+
+    <!-- Задание 5.3: Работа с блокировкой элемента -->
+    <h3>Блокировка инпута</h3>
+    <input type="text" id="blockInput">
+    <button id="blockBtn">Заблокировать</button>
+    <button id="unblockBtn">Разблокировать</button>
+
+    <!-- Задание 5.4: Изменение текста -->
+    <h3>Изменение текста</h3>
+    <input type="checkbox" id="checkBox"> Отметьте меня<br><br>
+    <button id="checkBtn">Проверить чекбокс</button>
+    <p id="message">Пока</p>
+
+    <script>
+        // Задание 5.2: Проверка формы авторизации
+        document.getElementById('authForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // предотвращаем отправку формы
+            
+            let login = document.getElementById('login').value;
+            let password = document.getElementById('password').value;
+            let errorMessage = document.getElementById('error-message');
+
+            if (!login || !password) {
+                errorMessage.textContent = 'Поля не заполнены!';
+            } else {
+                errorMessage.textContent = '';
+                // Редирект на другую страницу
+                window.location.href = 'https://example.com';
+            }
+        });
+
+        // Задание 5.3: Блокировка и разблокировка инпута
+        document.getElementById('blockBtn').addEventListener('click', function() {
+            document.getElementById('blockInput').disabled = true;
+        });
+
+        document.getElementById('unblockBtn').addEventListener('click', function() {
+            document.getElementById('blockInput').disabled = false;
+        });
+
+        // Задание 5.4: Проверка чекбокса и изменение текста
+        document.getElementById('checkBtn').addEventListener('click', function() {
+            let checkBox = document.getElementById('checkBox');
+            let message = document.getElementById('message');
+
+            if (checkBox.checked) {
+                message.textContent = 'Привет';
+            } else {
+                message.textContent = 'Пока';
+            }
+        });
+    </script>
+
+  <script>
+    let form = document.querySelector('#form');
+    let w = document.querySelector('#width');
+    let l = document.querySelector('#length');
+    let ans = document.querySelector('#answer');
+    form.onsubmit = function(event){
+      event.preventDefault();
+      ans.value = w.value * l.value;
+    }
+  </script>
+</body>
+</html>

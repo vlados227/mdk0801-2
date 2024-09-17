@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            padding: 5px;
+            text-align: center;
+        }
+        #slider img {
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Задание 5.1: Таймер с остановкой на 5 секундах -->
+    <h3>Таймер с остановкой на 5 секундах</h3>
+    <p id="timer1">Прошло: 0 сек.</p>
+
+    <!-- Задание 5.2: Электронные часы -->
+    <h3>Электронные часы</h3>
+    <p id="clock"></p>
+
+    <!-- Задание 5.3: Таймер обратного отсчета -->
+    <h3>Таймер обратного отсчета</h3>
+    <p id="countdown">10 сек.</p>
+
+    <!-- Задание 5.4: Слайдер -->
+    <h3>Слайдер</h3>
+    <div id="slider">
+        <img id="sliderImage" src="apple.jpg" alt="Изображение 1">
+    </div>
+
+    <!-- Задание 5.5: Открытие изображения по кнопке -->
+    <h3>Фрукты</h3>
+    <button onclick="openFruit('apple.jpg')">Яблоко</button>
+    <button onclick="openFruit('banana.jpg')">Банан</button>
+    <button onclick="openFruit('orange.jpg')">Апельсин</button>
+
+    <!-- Задание 5.6: Таймер до полуночи -->
+    <h3>До полуночи осталось:</h3>
+    <table>
+        <tr>
+            <th>Часы</th>
+            <th>Минуты</th>
+            <th>Секунды</th>
+        </tr>
+        <tr>
+            <td id="hours">00</td>
+            <td id="minutes">00</td>
+            <td id="seconds">00</td>
+        </tr>
+    </table>
+
+    <script>
+        // Задание 5.1: Таймер с остановкой на 5 секундах
+        let timePassed = 0;
+        let timer1 = setInterval(() => {
+            timePassed++;
+            document.getElementById('timer1').textContent = `Прошло: ${timePassed} сек.`;
+            if (timePassed >= 6) {
+                clearInterval(timer1);
+                document.getElementById('timer1').style.display = 'none';
+            }
+        }, 1000);
+
+        // Задание 5.2: Электронные часы
+        function updateClock() {
+            let now = new Date();
+            document.getElementById('clock').textContent = now.toLocaleTimeString();
+        }
+        setInterval(updateClock, 1000);
+        updateClock(); // Запускаем сразу для отображения текущего времени
+
+        // Задание 5.3: Таймер обратного отсчета
+        let countdown = 10;
+        let countdownTimer = setInterval(() => {
+            countdown--;
+            document.getElementById('countdown').textContent = `${countdown} сек.`;
+            if (countdown <= 0) {
+                clearInterval(countdownTimer);
+            }
+        }, 1000);
+
+        // Задание 5.4: Слайдер с изображениями
+        let images = ['apple.jpg', 'banana.jpg', 'orange.jpg' ];
+        let currentImage = 0;
+        setInterval(() => {
+            currentImage = (currentImage + 1) % images.length;
+            document.getElementById('sliderImage').src = images[currentImage];
+        }, 1000);
+
+        // Задание 5.5: Открытие изображения в новом окне
+        function openFruit(fruitImage) {
+            window.open(fruitImage, '_blank', 'width=300,height=300');
+        }
+
+        // Задание 5.6: Таймер до полуночи
+        function updateMidnightTimer() {
+            let now = new Date();
+            let midnight = new Date();
+            midnight.setHours(24, 0, 0, 0); // Устанавливаем время на 00:00 следующего дня
+
+            let timeDifference = midnight - now;
+
+            let hours = Math.floor(timeDifference / (1000 * 60 * 60));
+            let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            document.getElementById('hours').textContent = hours < 10 ? '0' + hours : hours;
+            document.getElementById('minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
+        }
+        setInterval(updateMidnightTimer, 1000);
+        updateMidnightTimer(); // Запускаем сразу для актуального времени
+    </script>
+
+</body>
+</html>
