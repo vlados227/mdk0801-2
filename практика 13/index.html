@@ -1,11 +1,164 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Массивы в JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .description {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .test {
+            background-color: #f1f1f1;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .test input[type="submit"] {
+            margin-top: 15px;
+            padding: 10px 15px;
+            background-color: #2980b9;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-  
+
+    <h1>Массивы в JavaScript</h1>
+
+    <div class="description">
+        <p>Массивы — это особый тип объекта в JavaScript, который позволяет хранить несколько значений в одной переменной. Каждый элемент массива имеет свой индекс, начиная с нуля. Массивы могут содержать элементы любого типа: числа, строки, другие массивы и даже объекты.</p>
+
+        <h2>Основные методы массивов</h2>
+        <ul>
+            <li><strong>push()</strong> — добавляет элемент в конец массива.</li>
+            <li><strong>pop()</strong> — удаляет последний элемент массива.</li>
+            <li><strong>shift()</strong> — удаляет первый элемент массива.</li>
+            <li><strong>unshift()</strong> — добавляет элемент в начало массива.</li>
+            <li><strong>length</strong> — возвращает количество элементов в массиве.</li>
+            <li><strong>forEach()</strong> — выполняет указанную функцию для каждого элемента массива.</li>
+        </ul>
+
+        <h2>Дополнительные методы работы с массивами</h2>
+        <ul>
+            <li><strong>map()</strong> — создает новый массив, результатом которого является применение функции к каждому элементу исходного массива.
+                <pre><code>let arr = [1, 2, 3];
+let doubled = arr.map(x => x * 2); // [2, 4, 6]</code></pre>
+            </li>
+            <li><strong>filter()</strong> — создает новый массив, содержащий элементы, которые удовлетворяют условию функции.
+                <pre><code>let arr = [1, 2, 3, 4, 5];
+let even = arr.filter(x => x % 2 === 0); // [2, 4]</code></pre>
+            </li>
+            <li><strong>reduce()</strong> — выполняет функцию "свертки", применяя её к каждому элементу массива для вычисления одного итогового значения.
+                <pre><code>let arr = [1, 2, 3, 4];
+let sum = arr.reduce((acc, x) => acc + x, 0); // 10</code></pre>
+            </li>
+            <li><strong>concat()</strong> — объединяет два или более массивов.
+                <pre><code>let arr1 = [1, 2];
+let arr2 = [3, 4];
+let combined = arr1.concat(arr2); // [1, 2, 3, 4]</code></pre>
+            </li>
+            <li><strong>includes()</strong> — проверяет, содержит ли массив определённое значение.
+                <pre><code>let arr = [1, 2, 3];
+let hasTwo = arr.includes(2); // true</code></pre>
+            </li>
+        </ul>
+
+        <h2>Многомерные массивы</h2>
+        <p>В JavaScript можно создавать массивы, содержащие другие массивы. Такие массивы называются многомерными.</p>
+        <pre><code>let matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+
+// Доступ к элементу
+console.log(matrix[1][2]); // 6</code></pre>
+
+        <h2>Работа с массивами объектов</h2>
+        <p>Массивы могут содержать объекты. Это полезно при работе с данными, например, в списке пользователей.</p>
+        <pre><code>let users = [
+    { name: "John", age: 30 },
+    { name: "Jane", age: 25 }
+];
+
+// Доступ к свойствам объектов в массиве
+console.log(users[0].name); // "John"</code></pre>
+    </div>
+
+    <div class="test">
+        <h2>Тест на знание массивов</h2>
+        <form id="quizForm">
+            <label>1. Какой метод используется для добавления элемента в конец массива?</label><br>
+            <input type="radio" name="question1" value="push"> push()<br>
+            <input type="radio" name="question1" value="pop"> pop()<br>
+            <input type="radio" name="question1" value="shift"> shift()<br><br>
+
+            <label>2. Что возвращает метод length?</label><br>
+            <input type="radio" name="question2" value="количество элементов"> Количество элементов в массиве<br>
+            <input type="radio" name="question2" value="последний элемент"> Последний элемент массива<br>
+            <input type="radio" name="question2" value="первый элемент"> Первый элемент массива<br><br>
+
+            <label>3. Какой метод удаляет первый элемент массива?</label><br>
+            <input type="radio" name="question3" value="unshift"> unshift()<br>
+            <input type="radio" name="question3" value="shift"> shift()<br>
+            <input type="radio" name="question3" value="pop"> pop()<br><br>
+
+            <label>4. Какой метод используется для создания нового массива на основе результатов применения функции ко всем элементам?</label><br>
+            <input type="radio" name="question4" value="map"> map()<br>
+            <input type="radio" name="question4" value="filter"> filter()<br>
+            <input type="radio" name="question4" value="reduce"> reduce()<br><br>
+
+            <label>5. Что делает метод concat()?</label><br>
+            <input type="radio" name="question5" value="возвращает массив"> Возвращает массив<br>
+            <input type="radio" name="question5" value="объединяет массивы">Объединяет несколько массивов<br>
+            <input type="radio" name="question5" value="добавляет элемент в массив"> Добавляет элемент в массив<br><br>
+
+            <input type="submit" value="Проверить ответы">
+        </form>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById("quizForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let score = 0;
+            const correctAnswers = {
+                question1: "push",
+                question2: "количество элементов",
+                question3: "shift",
+                question4: "map",
+                question5: "объединяет массивы"
+            };
+
+            const formData = new FormData(event.target);
+            for (const [key, value] of formData.entries()) {
+                if (value === correctAnswers[key]) {
+                    score++;
+                }
+            }
+
+            document.getElementById("result").innerHTML = "Ваш результат: " + score + " из 5.";
+        });
+    </script>
+
 </body>
 </html>
