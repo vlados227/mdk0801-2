@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        canvas {
+            border: 2px dashed #87CEEB;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="500" height="350"></canvas>
+
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Set up chart data
+        const data = [120, 90, 150]; // Example sales data
+        const labels = ['Basketballs', 'Baseballs', 'Footballs'];
+        const colors = [
+            ['#FF6347', '#FFA07A'], // Gradient for Basketballs (orange)
+            ['#4682B4', '#B0E0E6'], // Gradient for Baseballs (blue)
+            ['#FF4500', '#FF7F50']  // Gradient for Footballs (red-orange)
+        ];
+
+        const barWidth = 60;
+        const barSpacing = 70;
+        const chartHeight = 200;
+        const chartWidth = canvas.width;
+
+        // Function to draw the chart
+        function drawChart() {
+            // Draw axes
+            drawAxes();
+
+            // Set up the bars
+            for (let i = 0; i < data.length; i++) {
+                const x = (barWidth + barSpacing) * i + 80; // Adjusted for canvas width
+                const y = chartHeight - data[i] + 49; // Adjusting position for axes
+                const barHeight = data[i];
+
+                // Create a gradient for each bar
+                const gradient = ctx.createLinearGradient(0, y, 0, chartHeight + 50);
+                gradient.addColorStop(0, colors[i][0]);  // Start color
+                gradient.addColorStop(1, colors[i][1]);  // End color
+
+                // Draw the bar with the gradient
+                ctx.fillStyle = gradient;
+                ctx.fillRect(x, y, barWidth, barHeight);
+
+                // Draw the label below each bar
+                ctx.fillStyle = '#000';
+                ctx.font = '12px Arial';
+                ctx.fillText(labels[i], x + 5, chartHeight + 80);
+            }
+        }
+
+        // Function to draw axes
+        function drawAxes() {
+            // Vertical axis (y)
+            ctx.beginPath();
+            ctx.moveTo(60, 50);
+            ctx.lineTo(60, chartHeight + 50);
+            ctx.lineTo(chartWidth - 40, chartHeight + 50); // Horizontal axis (x)
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Label for the y-axis
+            ctx.save();
+            ctx.translate(20, chartHeight / 2 + 50); // Adjusted y-axis label placement
+            ctx.rotate(-Math.PI / 2);
+            ctx.textAlign = 'center';
+            ctx.font = '12px Arial';
+            ctx.fillText('Units Sold (in 100s)', 0, 0);
+            ctx.restore();
+
+            // Label for the x-axis
+            ctx.fillText('Product', chartWidth / 2, chartHeight + 100);
+        }
+
+        // Call the function to draw the chart
+        drawChart();
+    </script>
+</body>
+</html>

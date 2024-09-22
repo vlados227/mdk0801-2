@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Tasks</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        h2 {
+            color: black;
+            font-size: 24px;
+        }
+
+        #list-block, #toggle-list {
+            border: 1px solid black;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        ul li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Заголовок 1</h2>
+    <p>Это абзац текста 1.</p>
+
+    <h2>Заголовок 2</h2>
+    <p>Это абзац текста 2.</p>
+
+    <h2>Заголовок 3</h2>
+    <p>Это абзац текста 3.</p>
+
+    <ul id="my-list">
+        <li>Пункт 1</li>
+        <li>Пункт 2</li>
+        <li>Пункт 3</li>
+        <li>Пункт 4</li>
+        <li>Пункт 5</li>
+    </ul>
+
+    <button id="alert-list-items">Показать пункты списка</button>
+
+    <div id="list-block">
+        <a href="#" id="toggle-btn">Свернуть</a>
+        <ul>
+            <li>Элемент 1</li>
+            <li>Элемент 2</li>
+            <li>Элемент 3</li>
+            <li>Элемент 4</li>
+            <li>Элемент 5</li>
+            <li>Элемент 6</li>
+            <li>Элемент 7</li>
+            <li>Элемент 8</li>
+            <li>Элемент 9</li>
+            <li>Элемент 10</li>
+        </ul>
+    </div>
+
+    <button id="hide-show-btn">Скрыть/Показать список</button>
+    <div id="toggle-list">
+        <ul>
+            <li>Элемент 1</li>
+            <li>Элемент 2</li>
+            <li>Элемент 3</li>
+            <li>Элемент 4</li>
+            <li>Элемент 5</li>
+            <li>Элемент 6</li>
+            <li>Элемент 7</li>
+            <li>Элемент 8</li>
+            <li>Элемент 9</li>
+            <li>Элемент 10</li>
+        </ul>
+    </div>
+
+    <script>
+        // 5.1.1 Изменение всех заголовков h2
+        $('h2').text('Изучаем jQuery!').css({
+            'color': 'blue',
+            'font-size': '28px'
+        });
+
+        // 5.1.2 Вывод всех пунктов списка через alert
+        $('#alert-list-items').click(function() {
+            $('#my-list li').each(function(index, element) {
+                alert($(element).text());
+            });
+        });
+
+        // 5.2.1 Эффект slideToggle для сворачивания/разворачивания блока со списком
+        $('#toggle-btn').click(function(e) {
+            e.preventDefault();
+            $('#list-block ul').slideToggle(500, function() {
+                // Меняем текст кнопки в зависимости от состояния
+                if ($('#list-block ul').is(':visible')) {
+                    $('#toggle-btn').text('Свернуть');
+                } else {
+                    $('#toggle-btn').text('Развернуть');
+                }
+            });
+        });
+
+        // 5.2.2 Эффект hide и show для второго списка
+        $('#hide-show-btn').click(function() {
+            $('#toggle-list').toggle(500); // Используем метод toggle для скрытия/показа
+        });
+    </script>
+</body>
+</html>

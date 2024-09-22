@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>paint</title>
+  <style>
+    #palette,
+    #canvas {
+      display: inline-block;
+      border: 1px solid rgb(17, 17, 16);
+      cursor: default;
+      vertical-align: top;
+    }
+
+    #palette {
+      width: 95px;
+    }
+
+    #clear {
+      background: #eee;
+      color: #777;
+      padding: 10px;
+      width: 200px;
+      text-align: center;
+      margin: 15px auto;
+      cursor: pointer;
+    }
+
+    .conteiner {
+      padding: 20px;
+      white-space: normal;
+      width: 710px;
+      border: 1px solid #000;
+    }
+
+    .button {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    padding: 1px;
+    cursor: pointer;
+    border: 1px solid #fff;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="conteiner">
+    <div id="palette"> </div>
+    <div class = "button" >
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <div id="clear"> Очистить </div>
+  </div>
+
+  <script>
+    window.addEventListener('load', function onWindowLoad() {
+      generatePalette(document.querySelector('#palette'));// генерируем палитру 
+
+      let canvas = document.querySelector('#canvas');
+      let context = canvas.getContext('2d');
+
+      // инициализируем переменные для рисования
+
+      context.lineCap = "round";
+      context.lineWidth = 5;
+
+      // устанавливаем обработчик на кнопку очистки изображения
+      document.querySelector('#clear').onclick = function clear() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+      };
+
+      // на любое движение мыши по canvas будет выполняться данная функция
+
+      canvas.onmousemove = function drawIfPressed(e) {
+        let x = e.offsetX; // в “e” попадает экземпляр MouseEvent
+        let y = e.offsetY;
+        let dx = e.movementX;
+        let dy = e.movementY;
+
+        // проверка нажатия кнопки мыши, если да – то рисуем
+
+        if (e.buttons > 0) {
+          context.beginPath();
+          context.moveTo(x, y);
+          context.lineTo(x - dx, y - dy);
+          context.stroke();
+          context.closePath();
+        }
+      };
+
+      // функция генерации палитры
+      function generatePalette(palette) {
+
+        for (let r = 0, max = 3; r <= max; r++) {
+          for (let g = 0; g <= max; g++) {
+            for (let b = 0; b <= max; b++) {
+              let paletteBlock = document.createElement('div');
+              paletteBlock.className = 'button';
+              paletteBlock.addEventListener('click', function changeColor(e) {
+                context.strokeStyle = e.target.style.backgroundColor;
+              });
+
+              paletteBlock.style.backgroundColor = (
+                'rgb(' + Math.round(r * 255 / max) + ", "
+                + Math.round(g * 255 / max) + ", "
+                + Math.round(b * 255 / max) + ")"
+              );
+              palette.appendChild(paletteBlock);
+            }
+          }
+        }
+      }
+
+    });
+
+  </script>
+
+</body>
+
+</html>

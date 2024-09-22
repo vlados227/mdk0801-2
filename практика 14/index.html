@@ -8,13 +8,80 @@
 <body>
     <script>
         let river = {
-            name: 'Oka',
+            nameOneRiver: 'Ока  ',
             length: 3333,
-            description(){
-                document.write(`Река ${river} имеет длину ${length} км`)
+            regions: ["Сибирь", "Дальний Восток", "Центральный федеральный округ"],
+            rivers: [
+            { name: "Волга", length: 3530 }, 
+            { name: "Лена", length: 4400 }, 
+            { name: "Енисей", length: 3487 }
+            ],
+            description: function () {
+                document.write(`Самая длинная река в России - ${this.nameOneRiver} имеет длинну ${this.length} км <br>`);
+            },
+            allRegions: function (){
+                document.write(`Регионы России с самыми длинными реками: ${this.regions.join(', ')} <br>`)
+            },
+            longestRivers: function(){
+                document.write(`Cамые длинные реки в России: <br>`);
+                this.rivers.forEach(element => {
+                    document.write(`${element.name} - ${element.length} <br>`)
+                });
             }
+            
         }
         river.description();
+        river.allRegions();
+        river.longestRivers();
+
+        class Worker {
+            constructor(name, surname, rate, age, days) {
+                this.name = name;
+                this.surname = surname;
+                this.rate = rate;
+                this.age = age;
+                this.days = days;
+            }
+
+            getSalary (){
+                return `Сотрудник получает ${this.rate * this.days} рублей в месяц <br>`;
+            }
+
+            getFullName(){
+                return this.name +' '+ this.surname;
+            }
+
+            workerDescription (){
+                document.write(
+                    `
+                        <h3>Описание сотрудника</h3>
+                        ${this.name}<br>
+                        ${this.surname}<br>
+                        ${this.rate}<br>
+                        ${this.days}<br>
+                     `
+                )
+            }
+        }
+
+        class Student extends Worker {
+            constructor (name, surname, year){
+                super (name, surname);
+                this.year = year;
+            }
+
+            getCourse (){
+                const date = new Date();
+                let year = date.getFullYear();
+                return year - this.year;
+            }
+        }
+
+        const worker = new Worker('Ivan', 'Ivanov', 2500, 22, 14);
+        document.write(worker.getSalary())
+        worker.workerDescription();
+        const student1 = new Student('Nikolai', 'Davydov', 2021);
+        document.write('имя студента - ' + student1.getFullName() + ' ' + student1.getCourse() + ' курс') ;
     </script>
 </body>
 </html>
