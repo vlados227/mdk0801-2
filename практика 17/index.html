@@ -1,12 +1,204 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js Задание</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <style>
+        .hidden {
+            display: none;
+        }
+        .red {
+            color: red;
+        }
+        .blue {
+            color: blue;
+        }
+    </style>
 </head>
 <body>
-  
+
+    <!-- 5.1.2 Вывод имени и фамилии -->
+    <div id="app1">
+        <h2>Данные пользователя</h2>
+        <p>Имя: {{ firstName }} Фамилия: {{ lastName }}</p>
+    </div>
+
+    <!-- 5.1.3 Работа с числами -->
+    <div id="app2">
+        <h2>Математические операции</h2>
+        <p>Квадрат первого числа: {{ number1 ** 2 }}</p>
+        <p>Произведение двух чисел: {{ number1 * number2 }}</p>
+    </div>
+
+    <!-- 5.1.4 Массив с днями недели -->
+    <div id="app3">
+        <h2>Дни недели</h2>
+        <ol>
+            <li v-for="day in days" :key="day">{{ day }}</li>
+        </ol>
+    </div>
+
+    <!-- 5.2.1 Сумма двух чисел по кнопке -->
+    <div id="app4">
+        <h2>Сумма чисел</h2>
+        <p>Число 1 - {{ num1 }}, Число 2 - {{ num2 }}</p>
+        <button @click="showSum">Показать сумму</button>
+    </div>
+
+    <!-- 5.2.2 Удаление элементов из массива -->
+    <div id="app5">
+        <h2>Удаление элементов массива</h2>
+        <ul>
+            <li v-for="(item, index) in items" :key="index">{{ item }}</li>
+        </ul>
+        <button @click="removeFirst">Удалить первый элемент</button>
+        <button @click="removeLast">Удалить последний элемент</button>
+    </div>
+
+    <!-- 5.2.3 Инвертирование списка -->
+    <div id="app6">
+        <h2>Инвертирование списка</h2>
+        <ul>
+            <li v-for="(item, index) in invertItems" :key="index">{{ item }}</li>
+        </ul>
+        <button @click="invertList">Инвертировать список</button>
+    </div>
+
+    <!-- 5.3.1 Показать/спрятать абзац -->
+    <div id="app7">
+        <h2>Показать/спрятать абзац</h2>
+        <p v-show="isParagraphVisible">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum omnis beatae earum minima aspernatur dignissimos et deserunt possimus placeat sit iusto enim, provident sint neque illo aliquam consequatur ab nam?</p>
+        <button @click="showParagraph">Показать</button>
+        <button @click="hideParagraph">Спрятать</button>
+    </div>
+
+    <!-- 5.3.2 Корень числа -->
+    <div id="app8">
+        <h2>Корень числа</h2>
+        <input type="number" v-model="inputNumber">
+        <button @click="calculateSquareRoot">Рассчитать корень</button>
+        <p>Квадратный корень: {{ squareRoot }}</p>
+    </div>
+
+    <!-- 5.4.1 Изменение цвета текста с чекбоксом -->
+    <div id="app9">
+        <h2>Цвет текста</h2>
+        <label>
+            <input type="checkbox" v-model="isChecked"> Изменить цвет текста
+        </label>
+        <p :class="isChecked ? 'red' : 'blue'">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium distinctio, quis iusto consequatur veniam alias ad aliquid. Quidem pariatur distinctio, corrupti voluptates provident minima deleniti recusandae, fuga et repellat mollitia!</p>
+    </div>
+
+    <script>
+        // 5.1.2: Имя и фамилия пользователя
+        new Vue({
+            el: '#app1',
+            data: {
+                firstName: 'Иван',
+                lastName: 'Иванов'
+            }
+        });
+
+        // 5.1.3: Работа с числами
+        new Vue({
+            el: '#app2',
+            data: {
+                number1: 4,
+                number2: 5
+            }
+        });
+
+        // 5.1.4: Массив с днями недели
+        new Vue({
+            el: '#app3',
+            data: {
+                days: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье']
+            }
+        });
+
+        // 5.2.1: Сумма двух чисел
+        new Vue({
+            el: '#app4',
+            data: {
+                num1: 7,
+                num2: 3
+            },
+            methods: {
+                showSum() {
+                    alert('Сумма чисел: ' + (this.num1 + this.num2));
+                }
+            }
+        });
+
+        // 5.2.2: Удаление первого или последнего элемента
+        new Vue({
+            el: '#app5',
+            data: {
+                items: ['Элемент 1', 'Элемент 2', 'Элемент 3', 'Элемент 4', 'Элемент 5']
+            },
+            methods: {
+                removeFirst() {
+                    this.items.shift();
+                },
+                removeLast() {
+                    this.items.pop();
+                }
+            }
+        });
+
+        // 5.2.3: Инвертирование списка
+        new Vue({
+            el: '#app6',
+            data: {
+                invertItems: ['Элемент A', 'Элемент B', 'Элемент C', 'Элемент D', 'Элемент E']
+            },
+            methods: {
+                invertList() {
+                    this.invertItems.reverse();
+                }
+            }
+        });
+
+        // 5.3.1: Показать/спрятать абзац
+        new Vue({
+            el: '#app7',
+            data: {
+                isParagraphVisible: true
+            },
+            methods: {
+                showParagraph() {
+                    this.isParagraphVisible = true;
+                },
+                hideParagraph() {
+                    this.isParagraphVisible = false;
+                }
+            }
+        });
+
+        // 5.3.2: Вычисление квадратного корня
+        new Vue({
+            el: '#app8',
+            data: {
+                inputNumber: 0,
+                squareRoot: 0
+            },
+            methods: {
+                calculateSquareRoot() {
+                    this.squareRoot = Math.sqrt(this.inputNumber);
+                }
+            }
+        });
+
+        // 5.4.1: Изменение цвета текста с чекбоксом
+        new Vue({
+            el: '#app9',
+            data: {
+                isChecked: false
+            }
+        });
+    </script>
+
 </body>
 </html>
